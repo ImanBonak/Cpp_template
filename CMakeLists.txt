@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 # Note: update this to your new project's name and version
 project(
-  navigation_simulator
+  test_bench
   VERSION 1.0
   LANGUAGES CXX C
 )
@@ -43,20 +43,20 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# target: add_library(navigation_simulator INTERFACE)
-add_library(navigation_simulator ${headers} ${sources})
+# target: add_library(test_bench INTERFACE)
+add_library(test_bench ${headers} ${sources})
 
-set_target_properties(navigation_simulator PROPERTIES CXX_STANDARD 17)
+set_target_properties(test_bench PROPERTIES CXX_STANDARD 17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(navigation_simulator PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
+target_compile_options(test_bench PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
 
 # Link dependencies
-target_link_libraries(navigation_simulator PRIVATE fmt::fmt)
+target_link_libraries(test_bench PRIVATE fmt::fmt)
 
 target_include_directories(
-  navigation_simulator PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-                 $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
+  test_bench  PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+              $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
 )
 
 # ---- Create an installable target ----
